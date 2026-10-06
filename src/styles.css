@@ -1,0 +1,307 @@
+/*
+  Capability-demo styling, not a required look for your creation.
+  Choose scene/content AND UI tokens using docs/napplet-visual-design.md.
+  Replace this palette, type, density and pane layout to fit the project.
+  The local palette remains active unless FOLLOW_HOST_THEME is enabled.
+  The iframe is the viewport; preserve usable resize and touch behavior.
+*/
+
+:root {
+  --bg: #f4f6f8;
+  --fg: #17212b;
+  --primary: #2563eb;
+  --surface: color-mix(in srgb, var(--bg) 88%, var(--fg));
+  --surface-2: color-mix(in srgb, var(--bg) 78%, var(--fg));
+  --border: color-mix(in srgb, var(--fg) 14%, transparent);
+  --muted: color-mix(in srgb, var(--fg) 58%, var(--bg));
+  --ok: #16703b;
+  --warn: #9a6700;
+  --danger: #b42318;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --control-h: 28px;
+  --radius: 6px;
+  --napplet-text-selection: none;
+  color-scheme: light dark;
+  font: 13px/1.4 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:where(html, body, body *) {
+  -webkit-user-select: var(--napplet-text-selection, none);
+  user-select: var(--napplet-text-selection, none);
+}
+
+:where(input, textarea, select, [contenteditable], [data-napplet-select="text"]) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+:where([data-napplet-select="all"]) {
+  -webkit-user-select: all;
+  user-select: all;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+button,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Frame ─────────────────────────────────────────────────────────────── */
+
+.app {
+  container-type: inline-size;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-2);
+  overflow: hidden;
+}
+
+/* Toolbar ───────────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--control-h);
+}
+
+.toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--control-h);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.toolbar button:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.toolbar button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.toolbar button:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* tiny tier: icon-only buttons, labels return at compact */
+.toolbar .label {
+  display: none;
+}
+
+@container (min-width: 240px) {
+  .toolbar .label {
+    display: inline;
+  }
+}
+
+.status {
+  margin-left: auto;
+  padding: 0 var(--space-2);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.status-idle {
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.status-ok {
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 14%, var(--bg));
+}
+
+.status-warn {
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 16%, var(--bg));
+}
+
+.status-error {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 14%, var(--bg));
+}
+
+/* Domain strip ──────────────────────────────────────────────────────── */
+
+.domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: 11px;
+}
+
+.domain {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 1px var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.domain dt,
+.domain dd {
+  margin: 0;
+}
+
+.domain[data-state="on"] {
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 40%, transparent);
+}
+
+/* Workspace ─────────────────────────────────────────────────────────── */
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--space-2);
+  min-height: 0;
+}
+
+.pane {
+  display: grid;
+  gap: var(--space-2);
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+}
+
+.pane-draft {
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-content: start;
+}
+
+.field {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--space-1);
+  min-height: 0;
+}
+
+.field-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  min-height: calc(var(--control-h) * 2);
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  background: var(--surface);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-1) var(--space-2);
+  align-items: baseline;
+  font-size: 12px;
+}
+
+.meta-key {
+  color: var(--muted);
+}
+
+.mono {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.output {
+  height: 100%;
+  min-height: calc(var(--control-h) * 3);
+  margin: 0;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  background: var(--surface-2);
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* regular tier: draft beside output */
+@container (min-width: 480px) {
+  .workspace {
+    grid-template-columns: minmax(200px, 1fr) minmax(0, 2fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+/* wide tier: use the space — bigger editor, more output */
+@container (min-width: 900px) {
+  .app {
+    gap: var(--space-3);
+    padding: var(--space-3);
+  }
+
+  .workspace {
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 3fr);
+  }
+
+  textarea {
+    min-height: calc(var(--control-h) * 4);
+  }
+}
+
+/* short frames: drop informational rows, keep the controls and the editor */
+@media (max-height: 240px) {
+  .domains,
+  .field-label,
+  .meta {
+    display: none;
+  }
+
+  textarea {
+    min-height: var(--control-h);
+  }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Napplet</title>
+  </head>
+  <body>
+    <!--
+      A napplet is an applet framed by a runtime: the runtime already shows this
+      napplet's name, so there is no title header here. The frame is working
+      surface from the first pixel, and the layout adapts to any frame size.
+    -->
+    <main id="app" class="app">
+      <div class="toolbar" role="toolbar" aria-label="Actions">
+        <button id="identityButton" type="button" title="Refresh identity">
+          <span aria-hidden="true">◎</span><span class="label">Identity</span>
+        </button>
+        <button id="storageButton" type="button" title="Save draft">
+          <span aria-hidden="true">▣</span><span class="label">Save</span>
+        </button>
+        <button id="outboxButton" type="button" title="Query outbox">
+          <span aria-hidden="true">⇅</span><span class="label">Query</span>
+        </button>
+        <button id="resourceButton" type="button" title="Load resource">
+          <span aria-hidden="true">⬇</span><span class="label">Resource</span>
+        </button>
+        <button id="notifyButton" type="button" title="Send notification">
+          <span aria-hidden="true">🔔</span><span class="label">Notify</span>
+        </button>
+        <output id="status" class="status status-idle" aria-live="polite">Ready</output>
+      </div>
+
+      <dl id="capabilities" class="domains" aria-label="Injected NAP domains"></dl>
+
+      <div class="workspace">
+        <section class="pane pane-draft" aria-label="Draft">
+          <label class="field">
+            <span class="field-label">Draft note</span>
+            <textarea id="noteInput" rows="3">Hello from my napplet.</textarea>
+          </label>
+          <div class="meta">
+            <span class="meta-key">identity</span>
+            <span id="identityValue" class="mono truncate">not loaded</span>
+            <span class="meta-key">storage</span>
+            <span id="storageValue" class="mono truncate">not saved</span>
+          </div>
+        </section>
+
+        <section class="pane pane-output" aria-label="Output">
+          <pre id="output" class="output" data-napplet-select="text">No events yet.</pre>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

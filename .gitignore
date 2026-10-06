@@ -1,0 +1,14 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+.DS_Store
+*.local
+coverage
+.turbo
+
+
+# Napplet Space private build/publication state
+.napplet-space/
+.nip5a-manifest.json
