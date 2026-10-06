@@ -34,8 +34,18 @@
     "delayMs": 1500
   },
   "requires": [],
-  "relays": [],
+  "relays": [
+    "wss://relay.damus.io",
+    "wss://nos.lol",
+    "wss://relay.primal.net",
+    "wss://relay.nostr.wirednet.jp"
+  ],
   "servers": [],
-  "license": "MIT",
-  "topics": []
+  "license": "Unlicense",
+  "topics": [
+    "nostr",
+    "client",
+    "social"
+  ],
+  "description": "mini-nostr-saf: a minimal Nostr safari client. Browse notes, follows and long-form posts; the host signs with your identity, keys never touch the app."
 }
