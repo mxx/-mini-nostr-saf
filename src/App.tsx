@@ -2237,9 +2237,9 @@ export function App() {
           <button className="icon-button" onClick={() => setHelpOpen(true)} aria-label="使用说明" title="使用说明"><Icon name="help" /></button>
           <button className="icon-button" onClick={() => void forceAppUpdate(defaultUpdateEnv())} aria-label="版本更新，重新下载" title="版本更新，重新下载"><Icon name="download" /></button>
           <button className="icon-button" onClick={viewMode === "manual" ? refreshManualFeed : () => setConnectionEpoch((value) => value + 1)} aria-label={viewMode === "manual" ? "手动刷新帖子" : "重新连接资讯源"} title={viewMode === "manual" ? "手动刷新帖子" : "重新连接资讯源"}><Icon name="refresh" /></button>
-          <button className="identity-button" onClick={() => { setSignerError(""); setNip46Error(""); setIdentityOpen(true); }} aria-label={pubkey ? "查看已连接身份" : "连接签名器"} title={pubkey ? `已连接（${signerType === "nip46" ? "远程签名器" : "浏览器扩展"}），点击管理` : "连接签名器"}>
+          <button className="identity-button" onClick={() => { setSignerError(""); setNip46Error(""); setIdentityOpen(true); }} aria-label={pubkey ? "查看已连接身份" : isNapplet() ? "连接 host 身份" : "连接签名器"} title={pubkey ? `已连接（${signerType === "napplet" ? "host 身份" : signerType === "nip46" ? "远程签名器" : "浏览器扩展"}），点击管理` : isNapplet() ? "连接 host 身份" : "连接签名器"}>
             <Icon name="key" />
-            <span>{pubkey ? shortKey(pubkey) : "连接签名器"}</span>
+            <span>{pubkey ? shortKey(pubkey) : isNapplet() ? "连接 host 身份" : "连接签名器"}</span>
           </button>
         </div>
       </header>

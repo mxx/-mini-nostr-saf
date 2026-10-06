@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 import { nip5aManifest } from '@napplet/vite-plugin';
 
 export default defineConfig({
+  define: {
+    __SITE_NAME__: JSON.stringify("mini-nostr-saf"),
+    __APP_VERSION__: JSON.stringify("0.1.0-soy"),
+  },
   build: {
     // Vite's module-preload polyfill calls `fetch`; one inlined entry needs no
     // preload graph, and NIP-5D napplet code has no ambient network authority.
