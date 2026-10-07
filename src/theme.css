@@ -427,3 +427,12 @@ h2 { font-size: 24px; line-height: 1.08; }
     padding-bottom: 22px;
   }
 }
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent, #4da3ff);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
